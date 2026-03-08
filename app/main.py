@@ -1,6 +1,8 @@
 import os
 import sys
 import zlib
+from pathlib import Path
+
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -16,7 +18,7 @@ def main():
             f.write("ref: refs/heads/main\n")
         print("Initialized git directory")
     elif command == "cat-file":
-        with open(sys.argv[2], "rb") as f:
+        with open(Path('.git/objects') / sys.argv[3][:2] / sys.argv[3][2:] , "rb") as f:
             content = zlib.decompress(f.read())
             print(content.decode().split("\n")[1], end='')
     else:
