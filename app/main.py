@@ -18,7 +18,7 @@ def main():
         with open(".git/HEAD", "w") as f:
             f.write("ref: refs/heads/main\n")
         print("Initialized git directory")
-    elif command == "cat-file" and sys.argv[2] == 'p':
+    elif command == "cat-file" and sys.argv[2] == '-p':
         with open(Path('.git/objects') / sys.argv[3][:2] / sys.argv[3][2:] , "rb") as f:
             content = zlib.decompress(f.read())
             print(content.decode().split("\0")[1], end='')
