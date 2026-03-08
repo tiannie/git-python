@@ -9,7 +9,7 @@ def main():
     print("Logs from your program will appear here!", file=sys.stderr)
 
     command = sys.argv[1]
-    print(f'{sys.argv}')
+    print(f'{sys.argv}', file=sys.stderr)
     if command == "init":
         os.mkdir(".git")
         os.mkdir(".git/objects")
