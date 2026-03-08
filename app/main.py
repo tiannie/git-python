@@ -20,7 +20,7 @@ def main():
     elif command == "cat-file":
         with open(Path('.git/objects') / sys.argv[3][:2] / sys.argv[3][2:] , "rb") as f:
             content = zlib.decompress(f.read())
-            print(content.decode().split("\n")[1], end='')
+            print(content.decode().split("\0")[1], end='')
     else:
         raise RuntimeError(f"Unknown command #{command}")
 
