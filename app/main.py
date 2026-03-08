@@ -30,6 +30,7 @@ def main():
             (Path('.git/objects') / hex_digest[:2]).mkdir(exist_ok=True)
             with open(Path('.git/objects') / hex_digest[:2] / hex_digest[2:] , "wb") as f_obj:
                 f_obj.write(zlib.compress(obj_content))
+            print(hex_digest, end='')
     else:
         raise RuntimeError(f"Unknown command #{command}")
 
