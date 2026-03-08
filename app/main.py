@@ -1,3 +1,4 @@
+import hashlib
 import os
 import sys
 import zlib
@@ -17,10 +18,17 @@ def main():
         with open(".git/HEAD", "w") as f:
             f.write("ref: refs/heads/main\n")
         print("Initialized git directory")
-    elif command == "cat-file":
+    elif command == "cat-file" and sys.argv[2] == 'p':
         with open(Path('.git/objects') / sys.argv[3][:2] / sys.argv[3][2:] , "rb") as f:
             content = zlib.decompress(f.read())
             print(content.decode().split("\0")[1], end='')
+    elif command == "hash-object" and sys.argv[2] == '-w':
+        with open(sys.argv[3] , "r") as f:
+            content = f.read()  # clear text content
+            obj_content = f'blob {len(content)}\0{content}'.encode()  # content with header in bytecode
+            hex_digest = hashlib.sha1(obj_content).hexdigest()
+            with open(Path('.git/objects') / hex_digest[:2] / hex_digest[2:] , "wb") as f_obj:
+                f_obj.write(zlib.compress(obj_content))
     else:
         raise RuntimeError(f"Unknown command #{command}")
 
