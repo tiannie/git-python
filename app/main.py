@@ -3,9 +3,11 @@ import os
 import sys
 import zlib
 from pathlib import Path
+import argparse
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Git CLI')
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     print("Logs from your program will appear here!", file=sys.stderr)
 
