@@ -10,6 +10,6 @@ def ls_tree(sys_argv: List[str]) -> None:
         content = zlib.decompress(f.read())  # clear text content
         segments = content.split(b'\0')
         for i, segment in enumerate(segments):
-            if i:
+            if i and segment:
                 name = segment.split(b' ')[1]
-                print(name)
+                print(name.decode())
