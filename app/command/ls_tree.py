@@ -11,5 +11,6 @@ def ls_tree(sys_argv: List[str]) -> None:
         segments = content.split(b'\0')
         for i, segment in enumerate(segments):
             if i and segment:
+                print(segment)
                 name = segment.split(b' ')[1]
                 print(name.decode())
